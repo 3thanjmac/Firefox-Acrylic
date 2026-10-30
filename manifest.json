@@ -1,0 +1,53 @@
+{
+  "manifest_version": 3,
+  "name": "Acrylic Browser",
+  "version": "1.0.0",
+  "description": "Blurred acrylic material for the new tab page and the background of any website, with per-site tuning.",
+  "icons": {
+    "48": "icons/icon.svg",
+    "96": "icons/icon.svg"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "acrylic-browser@local",
+      "strict_min_version": "128.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
+  "permissions": ["storage", "unlimitedStorage", "activeTab"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "scripts": ["src/shared/acrylic.js", "src/background.js"]
+  },
+  "action": {
+    "default_title": "Acrylic: adjust this site",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": "icons/icon.svg"
+  },
+  "options_ui": {
+    "page": "src/options/options.html",
+    "open_in_tab": true
+  },
+  "chrome_url_overrides": {
+    "newtab": "src/newtab/newtab.html"
+  },
+  "chrome_settings_overrides": {
+    "homepage": "src/newtab/newtab.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/shared/acrylic.js", "src/content/content.js"],
+      "css": ["src/content/content.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "commands": {
+    "toggle-site": {
+      "suggested_key": { "default": "Alt+Shift+A" },
+      "description": "Toggle acrylic on the current site"
+    }
+  }
+}

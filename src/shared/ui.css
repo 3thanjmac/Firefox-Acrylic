@@ -1,0 +1,164 @@
+:root {
+  --bg: #f3f3f5;
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-strong: #ffffff;
+  --fg: #1b1b1f;
+  --muted: #5d5d66;
+  --border: rgba(0, 0, 0, 0.12);
+  --accent: #3b6ff5;
+  --accent-fg: #ffffff;
+  --control: rgba(0, 0, 0, 0.06);
+  --control-hover: rgba(0, 0, 0, 0.1);
+  font: 13px/1.4 system-ui, "Segoe UI Variable Text", "Segoe UI", sans-serif;
+  color: var(--fg);
+  accent-color: var(--accent);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #202127;
+    --surface: rgba(32, 33, 40, 0.72);
+    --surface-strong: #2a2b33;
+    --fg: #f1f1f4;
+    --muted: #a6a7b2;
+    --border: rgba(255, 255, 255, 0.1);
+    --accent: #7aa2ff;
+    --accent-fg: #0d1430;
+    --control: rgba(255, 255, 255, 0.07);
+    --control-hover: rgba(255, 255, 255, 0.12);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: var(--control);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+button:hover {
+  background: var(--control-hover);
+}
+button.primary {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-color: transparent;
+}
+button.danger:hover {
+  background: rgba(220, 60, 60, 0.25);
+}
+
+.icon-button {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  background: transparent;
+  border-color: transparent;
+}
+
+kbd {
+  font: 11px ui-monospace, "Cascadia Mono", Consolas, monospace;
+  padding: 1px 5px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--control);
+}
+
+/* Toggle switch */
+input.switch {
+  appearance: none;
+  position: relative;
+  flex: none;
+  width: 38px;
+  height: 20px;
+  margin: 0;
+  border-radius: 10px;
+  background: var(--control-hover);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+input.switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--muted);
+  transition: transform 0.15s, background 0.15s;
+}
+input.switch:checked {
+  background: var(--accent);
+  border-color: transparent;
+}
+input.switch:checked::after {
+  transform: translateX(18px);
+  background: var(--accent-fg);
+}
+
+/* Segmented control */
+.segmented {
+  display: inline-flex;
+  padding: 2px;
+  gap: 2px;
+  border-radius: 7px;
+  background: var(--control);
+  border: 1px solid var(--border);
+}
+.segmented button {
+  border: 0;
+  background: transparent;
+  padding: 3px 10px;
+  border-radius: 5px;
+}
+.segmented button[aria-checked="true"] {
+  background: var(--accent);
+  color: var(--accent-fg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+input[type="range"] {
+  width: 100%;
+  margin: 0;
+}
+
+input[type="color"] {
+  width: 36px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}

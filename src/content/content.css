@@ -1,0 +1,12 @@
+/* Only active while content.js sets [data-acrylic] on <html>.
+   The :not(#…) chains add ID-level specificity so ordinary page !important rules don't win. */
+
+html[data-acrylic]:not(#acrylic-a):not(#acrylic-b),
+html[data-acrylic]:not(#acrylic-a):not(#acrylic-b) > body {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+html[data-acrylic="deep"]:not(#acrylic-a):not(#acrylic-b) [data-acrylic-clear] {
+  background-color: transparent !important;
+}

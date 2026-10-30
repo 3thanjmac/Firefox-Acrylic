@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Acrylic settings</title>
+    <meta name="color-scheme" content="dark light" />
+    <link rel="icon" href="../../icons/icon.svg" />
+    <link rel="stylesheet" href="../shared/ui.css" />
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <canvas id="backdrop" aria-hidden="true"></canvas>
+
+    <div class="page">
+      <header class="page-header">
+        <img src="../../icons/icon.svg" alt="" width="40" height="40" />
+        <div>
+          <h1>Acrylic</h1>
+          <p class="muted">Blurred acrylic material for your new tab and the websites you visit.</p>
+        </div>
+      </header>
+
+      <section class="card" id="permission-card" hidden>
+        <div class="row">
+          <p>Acrylic needs access to websites to restyle their backgrounds.</p>
+          <button id="grant" class="primary">Allow on all websites</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Where</h2>
+        <label class="row setting">
+          <span>Acrylic on new tab &amp; home page<small class="muted">Off shows a plain base-color page.</small></span>
+          <input type="checkbox" class="switch" data-setting="homepage" />
+        </label>
+        <label class="row setting">
+          <span>Acrylic on websites<small class="muted">The default for every site. Per-site choices from the toolbar button win.</small></span>
+          <input type="checkbox" class="switch" data-setting="webpages" />
+        </label>
+      </section>
+
+      <section class="card">
+        <h2>Material</h2>
+
+        <div class="previews">
+          <figure>
+            <canvas id="preview-newtab"></canvas>
+            <figcaption>New tab</figcaption>
+          </figure>
+          <figure>
+            <canvas id="preview-light"></canvas>
+            <div class="sample light"><b>Light website</b><span>The quick brown fox jumps over the lazy dog.</span></div>
+            <figcaption>Light website · Auto tone</figcaption>
+          </figure>
+          <figure>
+            <canvas id="preview-dark"></canvas>
+            <div class="sample dark"><b>Dark website</b><span>The quick brown fox jumps over the lazy dog.</span></div>
+            <figcaption>Dark website · Auto tone</figcaption>
+          </figure>
+        </div>
+
+        <div class="row setting">
+          <span>Backdrop<small class="muted" id="source-help"></small></span>
+          <div class="segmented" data-setting="source" role="radiogroup">
+            <button value="ambient">Ambient</button>
+            <button value="image">Wallpaper</button>
+            <button value="native">Windows backdrop</button>
+          </div>
+        </div>
+
+        <div class="row setting" id="image-row">
+          <span>Wallpaper image<small class="muted">Use your desktop wallpaper for a true acrylic look. Stored locally.</small></span>
+          <div class="image-picker">
+            <img id="image-thumb" alt="" hidden />
+            <label class="button-like">
+              Choose image…
+              <input type="file" id="image-file" accept="image/*" hidden />
+            </label>
+            <button id="image-remove" class="danger" hidden>Remove</button>
+          </div>
+        </div>
+
+        <div class="row setting">
+          <span>Base color<small class="muted">The acrylic tint.</small></span>
+          <div class="color-picker">
+            <div id="presets" class="presets"></div>
+            <input type="color" data-setting="color" />
+          </div>
+        </div>
+
+        <label class="row setting slider-row">
+          <span>Tint opacity</span>
+          <input type="range" min="0" max="1" step="0.01" data-setting="tintOpacity" data-format="percent" />
+          <output></output>
+        </label>
+        <label class="row setting slider-row">
+          <span>Luminosity<small class="muted">How strongly the backdrop's brightness is pulled toward the tint.</small></span>
+          <input type="range" min="0" max="1" step="0.01" data-setting="luminosity" data-format="percent" />
+          <output></output>
+        </label>
+        <label class="row setting slider-row">
+          <span>Blur</span>
+          <input type="range" min="0" max="150" step="1" data-setting="blur" data-format="px" />
+          <output></output>
+        </label>
+        <label class="row setting slider-row">
+          <span>Saturation</span>
+          <input type="range" min="0.5" max="2" step="0.05" data-setting="saturation" data-format="percent" />
+          <output></output>
+        </label>
+        <label class="row setting slider-row">
+          <span>Noise</span>
+          <input type="range" min="0" max="0.15" step="0.005" data-setting="noise" data-format="percent" />
+          <output></output>
+        </label>
+      </section>
+
+      <section class="card">
+        <h2>Websites</h2>
+        <div class="row setting">
+          <span>Default coverage<small class="muted"><b>Background</b> replaces the page's root background. <b>Deep</b> also clears large containers painted the same color.</small></span>
+          <div class="segmented" data-setting="coverage" role="radiogroup">
+            <button value="background">Background</button>
+            <button value="deep">Deep</button>
+          </div>
+        </div>
+        <label class="row setting">
+          <span>Match page brightness<small class="muted">Light sites get a light tint and dark sites a dark one, so text stays readable. Off uses the base color everywhere.</small></span>
+          <input type="checkbox" class="switch" data-setting="matchPage" />
+        </label>
+      </section>
+
+      <section class="card">
+        <div class="row">
+          <h2>Per-site adjustments</h2>
+          <button id="sites-clear" class="danger">Clear all</button>
+        </div>
+        <p class="muted">Made from the toolbar button<span id="shortcut-hint"></span>.</p>
+        <table id="sites-table">
+          <thead>
+            <tr><th>Site</th><th>Changes</th><th></th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <p id="sites-empty" class="muted">No per-site adjustments yet.</p>
+      </section>
+
+      <section class="card" id="native-card">
+        <h2>Windows backdrop (advanced)</h2>
+        <p>
+          <b>Windows backdrop</b> uses the real Windows 11 acrylic material behind the browser window instead of a
+          simulated one. Firefox only exposes it through a few preferences and a <code>userChrome.css</code> rule, which
+          extensions can't set for you:
+        </p>
+        <ol>
+          <li>Open <code>about:config</code> and set:
+            <table class="prefs">
+              <tr><td><code>widget.windows.mica</code></td><td><code>true</code></td></tr>
+              <tr><td><code>widget.windows.mica.toplevel-backdrop</code></td><td><code>2</code> (acrylic)</td></tr>
+              <tr><td><code>browser.tabs.allow_transparent_browser</code></td><td><code>true</code></td></tr>
+              <tr><td><code>toolkit.legacyUserProfileCustomizations.stylesheets</code></td><td><code>true</code></td></tr>
+            </table>
+          </li>
+          <li>
+            Open <code>about:support</code> → <b>Profile Folder</b> → <b>Open Folder</b>. Create a <code>chrome</code>
+            folder there with a <code>userChrome.css</code> containing:
+            <pre id="userchrome"><code>/* Let the window's acrylic backdrop show through the content area. */
+:root {
+  --tabpanel-background-color: transparent !important;
+}</code></pre>
+            <button id="copy-userchrome">Copy</button>
+          </li>
+          <li>Keep the default Firefox theme (Mica is disabled with other themes) and restart Firefox.</li>
+        </ol>
+      </section>
+
+      <footer class="page-footer">
+        <button id="reset-all" class="danger">Reset all settings</button>
+      </footer>
+    </div>
+
+    <script src="../shared/acrylic.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>

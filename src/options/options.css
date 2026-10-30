@@ -1,0 +1,214 @@
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: transparent;
+}
+
+#backdrop {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.page-header h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+}
+.page-header p {
+  margin: 2px 0 0;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+}
+.card h2 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.card > p {
+  margin: 0 0 8px;
+}
+
+.setting {
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+}
+.card h2 + .setting,
+.previews + .setting {
+  border-top: 0;
+}
+.setting > span {
+  flex: 1;
+}
+.setting small {
+  display: block;
+  max-width: 460px;
+}
+
+.slider-row input[type="range"] {
+  flex: 0 0 280px;
+}
+.slider-row output {
+  width: 48px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.previews {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 4px 0 12px;
+}
+.previews figure {
+  position: relative;
+  margin: 0;
+}
+.previews canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  /* Checkerboard shows where the material is see-through (Windows backdrop mode). */
+  background: repeating-conic-gradient(rgba(128, 128, 128, 0.25) 0 25%, transparent 0 50%) 0 0 / 16px 16px;
+}
+.previews figcaption {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.sample {
+  position: absolute;
+  inset: 0 0 auto 0;
+  aspect-ratio: 16 / 10;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  pointer-events: none;
+}
+.sample.light {
+  color: #1b1b1f;
+}
+.sample.dark {
+  color: #ececf1;
+}
+
+.color-picker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.presets {
+  display: flex;
+  gap: 6px;
+}
+.presets button {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+}
+.presets button[aria-checked="true"] {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.image-picker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.image-picker img {
+  width: 64px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+}
+.button-like {
+  background: var(--control);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+.button-like:hover {
+  background: var(--control-hover);
+}
+
+#sites-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+#sites-table th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--muted);
+  padding: 6px 0;
+}
+#sites-table td {
+  padding: 6px 0;
+  border-top: 1px solid var(--border);
+}
+#sites-table td:last-child {
+  text-align: right;
+}
+#sites-table:has(tbody:empty) {
+  display: none;
+}
+
+code,
+pre {
+  font: 12px ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+pre {
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: var(--control);
+  border: 1px solid var(--border);
+  overflow: auto;
+}
+ol {
+  padding-left: 20px;
+}
+ol li {
+  margin-bottom: 10px;
+}
+.prefs {
+  margin-top: 6px;
+  border-collapse: collapse;
+}
+.prefs td {
+  padding: 3px 16px 3px 0;
+}
+
+.page-footer {
+  display: flex;
+  justify-content: flex-end;
+}

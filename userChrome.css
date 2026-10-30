@@ -1,0 +1,5 @@
+/* Copy into <profile>/chrome/userChrome.css to use Acrylic's "Windows backdrop" mode.
+   Lets the window's acrylic backdrop show through the content area. */
+:root {
+  --tabpanel-background-color: transparent !important;
+}

@@ -1,0 +1,14 @@
+{
+  "name": "acrylic-browser",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Firefox extension: blurred acrylic material for the new tab page and website backgrounds.",
+  "scripts": {
+    "start": "web-ext run --firefox=firefoxdeveloperedition",
+    "lint": "web-ext lint",
+    "build": "web-ext build --overwrite-dest"
+  },
+  "devDependencies": {
+    "web-ext": "^8.0.0"
+  }
+}

@@ -1,0 +1,91 @@
+body {
+  width: 330px;
+  margin: 0;
+  padding: 12px 14px 14px;
+  background: var(--bg);
+}
+
+.popup-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.popup-header .titles {
+  flex: 1;
+  min-width: 0;
+}
+.popup-header h1 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+.popup-header p {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.switch-row {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+.switch-row small {
+  display: block;
+}
+
+fieldset {
+  margin: 12px 0 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  gap: 10px;
+}
+fieldset:disabled {
+  opacity: 0.45;
+}
+
+.field {
+  display: grid;
+  grid-template-columns: 70px 1fr auto;
+  align-items: center;
+  gap: 8px;
+}
+.field .segmented {
+  grid-column: 2 / 4;
+  justify-self: start;
+}
+.field .check {
+  grid-column: 1 / 3;
+}
+.field output {
+  min-width: 42px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.status {
+  margin: 12px 0 0;
+  min-height: 1.4em;
+}
+
+.popup-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.notice {
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+}
+.notice p {
+  margin: 0 0 8px;
+}
